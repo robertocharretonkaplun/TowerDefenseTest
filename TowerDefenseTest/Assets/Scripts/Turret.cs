@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class
 Turret : MonoBehaviour {
+  // Reference to enemy target
   private Transform target;
+
+  // Turret Attributes
+  [Header("Turret Attributes")]
   public Transform TurretHead;
   public float viewDistance = 20.0f;
   public float headRotOffset = 90.0f;
   public float turretTurnSpeed = 2.0f;
+
+  // Shoot Attributes
+  [Header("Shoot Attributes")]
+  public GameObject bulletPref;
+  public Transform ShootPosition;
+  public float shootRate = 1.0f;
+  private float shootTimer = 0.0f;
+
   // Start is called before the first frame update
   void 
   Start() {
@@ -32,6 +44,14 @@ Turret : MonoBehaviour {
 
     TurretHead.rotation = Quaternion.Euler(0f, realRot.y - headRotOffset, 0f);
 
+    // Shoot validation
+    if (shootTimer <= 0.0f)
+    {
+      Shoot();
+      shootTimer = 1.0f / shootRate;
+    }
+
+    shootTimer -= Time.deltaTime;
   }
 
   void 
@@ -54,6 +74,16 @@ Turret : MonoBehaviour {
     }
     else {
       target = null;
+    }
+  }
+
+  private void Shoot()
+  {
+    var bulletObj = Instantiate(bulletPref, ShootPosition.position, ShootPosition.rotation);
+    var bullet = bulletObj.GetComponent<Bullet>();
+
+    if (bullet != null) {
+      bullet.FollowTarget(target);
     }
   }
 
