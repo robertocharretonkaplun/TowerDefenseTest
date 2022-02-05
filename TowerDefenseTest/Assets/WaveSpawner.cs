@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-enum WavePhase
-{
+enum 
+WavePhase {
   Phase_1 = 0,
   Phase_2 = 1,
   Phase_3 = 2,
@@ -11,8 +11,8 @@ enum WavePhase
   Phase_5 = 4,
 }
 
-public class WaveSpawner : MonoBehaviour
-{
+public class 
+WaveSpawner : MonoBehaviour {
   public Transform enemyPrefab;
   public Transform spawnLocation;
   public float timeOfWaves = 6.5f;
@@ -22,8 +22,8 @@ public class WaveSpawner : MonoBehaviour
   public TextMeshProUGUI WaveTxt;
   WavePhase wavePhase;
   // Start is called before the first frame update
-  void Start()
-  {
+  void 
+  Start() {
     wavePhase = WavePhase.Phase_1;
   }
 
@@ -47,10 +47,10 @@ public class WaveSpawner : MonoBehaviour
   /* 
    * brief: Spawn group of enemies. 
    */
-  private IEnumerator Wave() {
+  private IEnumerator 
+  Wave() {
     // Change the Wave phase
-    switch (wavePhase)
-    {
+    switch (wavePhase) {
       case WavePhase.Phase_1:
         waveIndex++;
         wavePhase = WavePhase.Phase_2;

@@ -7,8 +7,7 @@ public class waypoints : MonoBehaviour
   // Access from anywhere in the project
   public static Transform[] Waypoints;
 
-  void Awake()
-  {
+  void Awake() {
     // Initialize the array of points
     Waypoints = new Transform[transform.childCount];
 
