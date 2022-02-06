@@ -11,7 +11,7 @@ Enemy : MonoBehaviour {
 
   private void 
   Start() {
-    target = waypoints.Waypoints[0];
+    target = waypoints.Waypoints[0]; 
   }
 
   private void 
@@ -36,6 +36,8 @@ Enemy : MonoBehaviour {
     // If the enemy reach the last point, its destroyed
     if (pointIndex >= waypoints.Waypoints.Length - 1) {
       Destroy(gameObject);
+      Time.timeScale = 0;
+      LevelManager.instance.LooseScreen();
     }
     else {
       // Change the waypoint index

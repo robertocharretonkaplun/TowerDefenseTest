@@ -48,6 +48,8 @@ public class Bullet : MonoBehaviour
 
   private void Hit()
   {
+    LevelManager.instance.points += 1;
+    LevelManager.instance.amounOfEnemies--;
     var Particle = Instantiate(destroyEffect, transform.position, transform.rotation);
     Destroy(Particle, 1.5f);
     Destroy(target.gameObject);

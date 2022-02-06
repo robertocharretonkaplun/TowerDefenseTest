@@ -20,6 +20,7 @@ WaveSpawner : MonoBehaviour {
   public int waveIndex = 0;
   public TextMeshProUGUI TimerTxt;
   public TextMeshProUGUI WaveTxt;
+  public GameObject winScreen;
   WavePhase wavePhase;
   // Start is called before the first frame update
   void 
@@ -31,17 +32,30 @@ WaveSpawner : MonoBehaviour {
   void Update()
   {
     // Spawn multiple waves of enemies depending on the time of waves generated.
-    if (timer <= 0.0f) {
-      StartCoroutine( Wave());
-      timer = timeOfWaves;
+    if (waveIndex != 25)
+    {
+      if (timer <= 0.0f) {
+        StartCoroutine( Wave());
+        timer = timeOfWaves;
+      }
     }
 
-    timer -= Time.deltaTime;
 
     // Update texts
     var fixTime = Mathf.Floor(timer);
     TimerTxt.text = "Next wave start in: " + fixTime.ToString();
     WaveTxt.text = "Wave: " + waveIndex.ToString();
+
+    // Win condition
+    if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25)
+    {
+      Time.timeScale = 0;
+      winScreen.SetActive(true);
+    }
+    else
+    {
+      timer -= Time.deltaTime;
+    }
   }
 
   /* 
@@ -86,6 +100,7 @@ WaveSpawner : MonoBehaviour {
   private void 
   SpawnEnemy() {
     Instantiate(enemyPrefab, spawnLocation.position, spawnLocation.rotation);
+    LevelManager.instance.amounOfEnemies++;
   }
 
 }

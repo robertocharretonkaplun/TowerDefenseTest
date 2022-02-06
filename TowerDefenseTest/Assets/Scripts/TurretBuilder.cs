@@ -15,7 +15,7 @@ public class TurretBuilder : MonoBehaviour
     {
       return;
     }
-      instance = this;
+    instance = this;
   }
 
   // Start is called before the first frame update
