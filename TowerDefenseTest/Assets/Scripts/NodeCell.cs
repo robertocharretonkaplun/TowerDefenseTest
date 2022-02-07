@@ -42,14 +42,21 @@ public class NodeCell : MonoBehaviour
     }
     else
     {
-      if (LevelManager.instance.points >= 25 && LevelManager.instance.amounOfBasicTurrets >= 0)
+      if (LevelManager.instance.points >= 25 && LevelManager.instance.amounOfBasicTurrets <= 5)
       {
         // Remove points from player
         LevelManager.instance.points -= 25;
-        LevelManager.instance.amounOfBasicTurrets -= 1;
-        // Set new object reference
-        GameObject newTorret = TurretBuilder.instance.GetTurret();
-        turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
+        if (LevelManager.instance.amounOfBasicTurrets == 0)
+        {
+          LevelManager.instance.amounOfBasicTurrets = 0;
+        }
+        else
+        {
+          LevelManager.instance.amounOfBasicTurrets -= 1;
+          // Set new object reference
+          GameObject newTorret = TurretBuilder.instance.GetTurret();
+          turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
+        }
       }
       else
       {

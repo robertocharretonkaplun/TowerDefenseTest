@@ -50,6 +50,7 @@ WaveSpawner : MonoBehaviour {
     if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25)
     {
       Time.timeScale = 0;
+      PlayerPrefs.SetInt("Points", LevelManager.instance.points);
       winScreen.SetActive(true);
     }
     else
