@@ -54,21 +54,26 @@ Turret : MonoBehaviour {
     shootTimer -= Time.deltaTime;
   }
 
+  /*
+   * brief: Method in charge of detecting new enemies at the ground.
+   */
   void 
   UpdateTarget() {
+    // Set a reference to the list of enemies in the game
     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
     float shortDistance = Mathf.Infinity;
     GameObject closeEnemy = null;
 
     foreach (GameObject enemy in enemies) {
+      // Get the distance from the enemy position and the turret position
       float distance = Vector3.Distance(transform.position, enemy.transform.position);
-
+      // Check what enemy is closer and set it as the principal enemu
       if (distance < shortDistance) {
         shortDistance = distance;
         closeEnemy = enemy;
       }
     }
-
+    // Check that the enemy that is closer to the turret became the main target
     if (closeEnemy != null && shortDistance <= viewDistance) {
       target = closeEnemy.transform;
     }
@@ -77,16 +82,25 @@ Turret : MonoBehaviour {
     }
   }
 
-  private void Shoot()
-  {
+  /*
+   * brief: Generate bullets that will follow the enemy targets.
+   */
+  private void
+  Shoot() {
+    // Instantiate a reference from the bullet prefab
     var bulletObj = Instantiate(bulletPref, ShootPosition.position, ShootPosition.rotation);
     var bullet = bulletObj.GetComponent<Bullet>();
 
+    // Is the bullet was generated, then it will follow the enemy.
     if (bullet != null) {
       bullet.FollowTarget(target);
     }
   }
 
+  /*
+   * brief: Method in charge of debuggin purposes for the area detection from enemies on
+   * the turrets.
+   */
   private void 
   OnDrawGizmosSelected() {
     Gizmos.color = Color.green;

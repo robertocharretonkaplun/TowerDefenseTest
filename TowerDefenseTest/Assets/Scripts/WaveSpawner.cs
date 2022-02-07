@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
+/*
+ * brief: Enum in charge of enumerating the amount of wave phases.
+ */
 enum 
 WavePhase {
   Phase_1 = 0,
@@ -25,15 +29,15 @@ WaveSpawner : MonoBehaviour {
   // Start is called before the first frame update
   void 
   Start() {
+    // Set the initial phase
     wavePhase = WavePhase.Phase_1;
   }
 
   // Update is called once per frame
-  void Update()
-  {
+  void
+  Update() {
     // Spawn multiple waves of enemies depending on the time of waves generated.
-    if (waveIndex != 25)
-    {
+    if (waveIndex != 25) {
       if (timer <= 0.0f) {
         StartCoroutine( Wave());
         timer = timeOfWaves;
@@ -47,14 +51,12 @@ WaveSpawner : MonoBehaviour {
     WaveTxt.text = "Wave: " + waveIndex.ToString();
 
     // Win condition
-    if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25)
-    {
+    if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25) {
       Time.timeScale = 0;
       PlayerPrefs.SetInt("Points", LevelManager.instance.points);
       winScreen.SetActive(true);
     }
-    else
-    {
+    else {
       timer -= Time.deltaTime;
     }
   }
@@ -97,7 +99,9 @@ WaveSpawner : MonoBehaviour {
 
   }
 
-
+  /*
+   * brief: Method in charge of generating a new enemy at the enemy base.
+   */
   private void 
   SpawnEnemy() {
     Instantiate(enemyPrefab, spawnLocation.position, spawnLocation.rotation);
