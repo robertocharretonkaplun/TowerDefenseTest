@@ -43,18 +43,20 @@ NodeCell : MonoBehaviour {
     }
     else {
       // Instance new turrets if the user has more that 25 points and enough turrets.
-      if (LevelManager.instance.points >= 25 && LevelManager.instance.amounOfBasicTurrets <= 5) {
-        // Remove points from player
-        LevelManager.instance.points -= 25;
-        // If the amount of basic turrets is equal to cero, stop instantiating
-        if (LevelManager.instance.amounOfBasicTurrets == 0) {
-          LevelManager.instance.amounOfBasicTurrets = 0;
-        }
-        else {
-          LevelManager.instance.amounOfBasicTurrets -= 1;
-          // Set new object reference
-          GameObject newTorret = TurretBuilder.instance.GetTurret();
-          turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
+      if (LevelManager.instance.amounOfBasicTurrets <= 5) {
+        if (LevelManager.instance.points >= 25) {
+          // If the amount of basic turrets is equal to cero, stop instantiating
+          if (LevelManager.instance.amounOfBasicTurrets == 0) {
+            LevelManager.instance.amounOfBasicTurrets = 0;
+          }
+          else {
+            // Remove points from player
+            LevelManager.instance.points -= 25;
+            LevelManager.instance.amounOfBasicTurrets -= 1;
+            // Set new object reference
+            GameObject newTorret = TurretBuilder.instance.GetTurret();
+            turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
+          }
         }
       }
       else {
