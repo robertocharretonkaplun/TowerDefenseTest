@@ -42,22 +42,38 @@ NodeCell : MonoBehaviour {
       return;
     }
     else {
+      // If the amount of basic turrets is equal to cero, stop instantiating
+      if (LevelManager.instance.amounOfBasicTurrets == 0)
+      {
+        LevelManager.instance.amounOfBasicTurrets = 0;
+        return;
+      }
       // Instance new turrets if the user has more that 25 points and enough turrets.
       if (LevelManager.instance.amounOfBasicTurrets <= 5) {
-        if (LevelManager.instance.points >= 25) {
-          // If the amount of basic turrets is equal to cero, stop instantiating
-          if (LevelManager.instance.amounOfBasicTurrets == 0) {
-            LevelManager.instance.amounOfBasicTurrets = 0;
-          }
-          else {
-            // Remove points from player
-            LevelManager.instance.points -= 25;
-            LevelManager.instance.amounOfBasicTurrets -= 1;
-            // Set new object reference
-            GameObject newTorret = TurretBuilder.instance.GetTurret();
-            turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
-          }
+        // Check that there is enough points
+        if (LevelManager.instance.points < 25) {
+          return;
         }
+        // Set new object reference
+        GameObject newTorret = TurretBuilder.instance.GetTurret();
+
+        if (newTorret.gameObject.tag == "BasicTurret" && LevelManager.instance.points >= 25)
+        {
+          // Remove points from player
+          LevelManager.instance.amounOfBasicTurrets -= 1;
+          newTorret.GetComponent<Turret>().shootRate = 1.0f;
+          LevelManager.instance.points -= 25;
+          //turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);
+        }
+        if (newTorret.gameObject.tag == "AdvanceTurret" && LevelManager.instance.points >= 50)
+        {
+          // Remove points from player
+          LevelManager.instance.amounOfBasicTurrets -= 1;
+          newTorret.GetComponent<Turret>().shootRate = 3f;
+          LevelManager.instance.points -= 50;
+        }
+
+        turretRef = Instantiate(newTorret, transform.position + turretOffset, transform.rotation);        
       }
       else {
         // Show warning color if the player try to place a turret, when he hasnt 

@@ -52,6 +52,8 @@ Turret : MonoBehaviour {
     }
 
     shootTimer -= Time.deltaTime;
+
+    
   }
 
   /*
