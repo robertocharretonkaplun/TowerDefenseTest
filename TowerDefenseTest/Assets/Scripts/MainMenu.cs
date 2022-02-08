@@ -6,13 +6,16 @@ using TMPro;
 public class 
 MainMenu : MonoBehaviour {
   public TextMeshProUGUI Points;
+  public TextMeshProUGUI Waves;
 
   private void 
   Start() {
     // Get the stored points from the memory
     string previousPoints = PlayerPrefs.GetInt("Points").ToString();
+    string previousWaves = PlayerPrefs.GetInt("Waves").ToString();
     // Show the points at screen
     Points.text = "Score: " + previousPoints;
+    Waves.text = "Waves: " + previousWaves;
   }
 
   /*
