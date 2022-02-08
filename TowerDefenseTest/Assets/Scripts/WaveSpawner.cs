@@ -48,7 +48,7 @@ WaveSpawner : MonoBehaviour {
     // Update texts
     var fixTime = Mathf.Floor(timer);
     TimerTxt.text = "Next wave start in: " + fixTime.ToString();
-    WaveTxt.text = "Wave: " + waveIndex.ToString();
+    WaveTxt.text = waveIndex.ToString();
 
     // Win condition
     if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25) {
