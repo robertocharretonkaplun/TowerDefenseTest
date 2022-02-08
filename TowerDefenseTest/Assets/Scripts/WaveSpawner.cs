@@ -17,6 +17,7 @@ WavePhase {
 
 public class 
 WaveSpawner : MonoBehaviour {
+  public static WaveSpawner instance;
   public Transform enemyPrefab;
   public Transform spawnLocation;
   public float timeOfWaves = 6.5f;
@@ -29,6 +30,11 @@ WaveSpawner : MonoBehaviour {
   // Start is called before the first frame update
   void 
   Start() {
+    // Set instance of the object
+    if (instance != null) {
+      return;
+    }
+    instance = this;
     // Set the initial phase
     wavePhase = WavePhase.Phase_1;
   }
@@ -54,6 +60,7 @@ WaveSpawner : MonoBehaviour {
     if (LevelManager.instance.amounOfEnemies == 0 && waveIndex >=2 && waveIndex == 25) {
       Time.timeScale = 0;
       PlayerPrefs.SetInt("Points", LevelManager.instance.points);
+      
       winScreen.SetActive(true);
     }
     else {
