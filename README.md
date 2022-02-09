@@ -20,7 +20,7 @@ The unity version for development is 2021.2.0f1, we encorage you to download thi
 On the main branch, you can find a folder named 'APK_Game', on it you will find a .rar compress file named 'APK_Game',
 
 ### Mobile
-On the mobile branch, you can find a folder named 'APK_Game', on it you will find a .rar compress file named 'APK_Game', extract that file in order to run the game in Android versions.
+On the mobile branch, you can find a folder named 'APK_Game', on it you will find a .rar compress file named 'TowerDefenseByRobertoCharreton', extract that file in order to run the game in Android versions.
 Add the .apk file into your phone folder to be able to install and run the game.
 
 
