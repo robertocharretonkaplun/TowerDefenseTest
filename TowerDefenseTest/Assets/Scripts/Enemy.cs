@@ -37,6 +37,8 @@ Enemy : MonoBehaviour {
     if (pointIndex >= waypoints.Waypoints.Length - 1) {
       Destroy(gameObject);
       Time.timeScale = 0;
+      PlayerPrefs.SetInt("Points", LevelManager.instance.points);
+      PlayerPrefs.SetInt("Waves",  WaveSpawner.instance.waveIndex);
       LevelManager.instance.LooseScreen();
     }
     else {
